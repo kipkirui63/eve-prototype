@@ -82,7 +82,7 @@ function LoginPage({
                     name="phoneNumber"
                     type="tel"
                     required
-                    placeholder="+254 700 000 000"
+                    placeholder="+61 700 000 000"
                     autoComplete="tel"
                     className="w-full rounded-[10px] border border-[#cdd9d0] bg-[#f6f9f6] px-4 py-3 text-[13px] text-[#1b4332] placeholder-[#a8bdb4] outline-none transition-colors focus:border-[#1b4332] focus:bg-white"
                   />
