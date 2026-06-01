@@ -97,8 +97,8 @@ function VerificationPage({
       : normalizedName.includes('cert')
         ? 'Certificate'
         : 'Invoice'
-    const inferredOrigin = normalizedName.includes('kenya')
-      ? 'Kenya'
+    const inferredOrigin = normalizedName.includes('Australia')
+      ? 'Australia'
       : normalizedName.includes('india')
         ? 'India'
         : normalizedName.includes('turkey')
