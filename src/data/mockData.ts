@@ -2,7 +2,7 @@ import type { ProductRecord, VerificationForm, VerificationReport } from '../typ
 
 export const initialForm: VerificationForm = {
   businessName: '',
-  country: 'Kenya',
+  country: 'Australia',
   platform: 'Shopify',
   website: '',
   contactName: '',
@@ -16,7 +16,7 @@ export const initialForm: VerificationForm = {
   consent: true,
 }
 
-export const countries = ['Kenya', 'United States', 'United Kingdom', 'Canada', 'Germany']
+export const countries = ['Australia', 'United States', 'United Kingdom', 'Canada', 'Germany']
 
 export const platforms = ['Shopify', 'WooCommerce', 'Magento', 'Custom Storefront']
 
@@ -62,7 +62,7 @@ export const defaultReport: VerificationReport = {
       id: 'shipment',
       label: 'Shipping manifest',
       source: 'Manifest registry match',
-      redactedPreview: 'Shipment route verified | Batch code: [REDACTED] | Destination: Kenya warehouse',
+      redactedPreview: 'Shipment route verified | Batch code: [REDACTED] | Destination: Australia warehouse',
       verified: true,
     },
     {
