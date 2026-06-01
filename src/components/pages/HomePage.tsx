@@ -28,16 +28,7 @@ function HomePage({
             </p>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-[#52796f]">
-            <button type="button" className="transition-colors hover:text-[#1b4332]">
-              How it works
-            </button>
-            <button type="button" className="transition-colors hover:text-[#1b4332]">
-              Pricing
-            </button>
-            <button type="button" className="transition-colors hover:text-[#1b4332]">
-              Brands
-            </button>
+          <div className="flex items-center gap-4 text-sm text-[#52796f]">
             <button
               type="button"
               onClick={onLogin}
