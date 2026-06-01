@@ -5,7 +5,7 @@ React/Vite frontend for EcoVerify, a merchant-facing sustainability verification
 ## Live URLs
 
 ```text
-Frontend: https://eco-verify.vercel.app
+Frontend: https://eco-verify-mu.vercel.app
 Backend:  https://ecoverify-backend.onrender.com
 ```
 
