@@ -12,6 +12,7 @@ import SettingsPage from './components/pages/SettingsPage'
 import VerificationProgressPage from './components/pages/VerificationProgressPage'
 import VerificationPage from './components/pages/VerificationPage'
 import { getCurrentUser, login, register, type AuthSession } from './api/auth'
+import { fetchProfile, saveProfile } from './api/profile'
 import { fetchSubmissions, saveSubmission } from './api/submissions'
 import {
   countries,
@@ -233,6 +234,7 @@ function App() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>(() => getCurrentRoute() === 'register' ? 'register' : 'login')
   const [authError, setAuthError] = useState('')
   const [authLoading, setAuthLoading] = useState(false)
+  const [onboardingSaving, setOnboardingSaving] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [report, setReport] = useState<VerificationReport>(defaultReport)
@@ -262,7 +264,17 @@ function App() {
       if (!session?.accessToken) return
 
       try {
-        await getCurrentUser(session.accessToken)
+        const user = await getCurrentUser(session.accessToken)
+        const profile = await fetchProfile(session.accessToken)
+        if (!ignore) {
+          setForm((current) => ({
+            ...current,
+            ...profile,
+            contactEmail: profile.contactEmail || user.email || current.contactEmail,
+            contactPhone: profile.contactPhone || user.phoneNumber || current.contactPhone,
+          }))
+        }
+
         const submissions = await fetchSubmissions(session.accessToken)
         if (ignore || submissions.length === 0) return
 
@@ -418,9 +430,36 @@ function App() {
     }
   }
 
-  function submitOnboarding(event: React.FormEvent<HTMLFormElement>) {
+  async function submitOnboarding(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    navigate('verification')
+
+    if (!session?.accessToken) {
+      navigate('login')
+      return
+    }
+
+    try {
+      setOnboardingSaving(true)
+      const savedProfile = await saveProfile(
+        {
+          businessName: form.businessName,
+          country: form.country,
+          platform: form.platform,
+          website: form.website,
+          contactName: form.contactName,
+          contactEmail: form.contactEmail,
+          contactPhone: form.contactPhone,
+        },
+        session.accessToken,
+      )
+      setForm((current) => ({ ...current, ...savedProfile }))
+      navigate('verification')
+    } catch (error) {
+      console.error(error)
+      window.alert('Your profile could not be saved. Check that the backend is running and try again.')
+    } finally {
+      setOnboardingSaving(false)
+    }
   }
 
   async function submitVerification(event: React.FormEvent<HTMLFormElement>) {
@@ -479,6 +518,7 @@ function App() {
           onBack={() => navigate('login')}
           onSubmit={submitOnboarding}
           onChange={updateField}
+          isSaving={onboardingSaving}
           countries={countries}
           platforms={platforms}
         />

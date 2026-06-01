@@ -9,6 +9,7 @@ function OnboardingPage({
   onBack,
   onSubmit,
   onChange,
+  isSaving,
   countries,
   platforms,
 }: {
@@ -16,6 +17,7 @@ function OnboardingPage({
   onBack: () => void
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   onChange: <K extends keyof VerificationForm>(key: K, value: VerificationForm[K]) => void
+  isSaving: boolean
   countries: string[]
   platforms: string[]
 }) {
@@ -114,15 +116,19 @@ function OnboardingPage({
               </button>
               <button
                 type="submit"
-                aria-label="Continue"
-                disabled={!canContinue}
+                aria-label={isSaving ? 'Saving profile' : 'Continue'}
+                disabled={!canContinue || isSaving}
                 className={`flex h-12 w-12 items-center justify-center rounded-full text-white shadow-sm transition-colors ${
-                  canContinue
+                  canContinue && !isSaving
                     ? 'bg-[#1b4332] hover:bg-[#163829]'
                     : 'cursor-not-allowed bg-[#b7c4b8]'
                 }`}
               >
-                <IconArrowRight size={20} />
+                {isSaving ? (
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                ) : (
+                  <IconArrowRight size={20} />
+                )}
               </button>
             </div>
           </form>
