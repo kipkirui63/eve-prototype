@@ -357,7 +357,7 @@ function VerificationPage({
                         <IconCheckMini />
                       </span>
                       <span className="leading-6">
-                        Confirm the details are correct before sending for verification.
+                        By confirming, I certify that the submitted details and evidence are accurate, I am authorised to provide them, and I consent to their use for verification and issuing a public trust badge with redacted evidence.
                       </span>
                     </label>
 
@@ -771,7 +771,7 @@ function VerificationPage({
                     <IconCheckMini />
                   </span>
                   <span className="leading-6">
-                    I confirm the information is accurate and I understand public badge details may be shown with redacted evidence.
+                    By confirming, I certify that the submitted details and evidence are accurate, I am authorised to provide them, and I consent to their use for verification and issuing a public trust badge with redacted evidence.
                   </span>
                 </label>
 

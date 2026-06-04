@@ -13,7 +13,7 @@ export const initialForm: VerificationForm = {
   productUrl: '',
   sustainabilityCategory: '',
   files: [],
-  consent: true,
+  consent: false,
 }
 
 export const countries = ['Australia', 'United States', 'United Kingdom', 'Canada', 'Germany']

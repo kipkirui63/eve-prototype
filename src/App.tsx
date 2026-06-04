@@ -279,7 +279,7 @@ function App() {
         if (ignore || submissions.length === 0) return
 
         const [latestSubmission] = submissions
-        setForm((current) => ({ ...current, ...latestSubmission.form }))
+        setForm((current) => ({ ...current, ...latestSubmission.form, consent: false }))
         setReport(latestSubmission.report)
         setProductRows(submissions.map((submission) => submission.product))
         setActivity(submissions.map((submission) => submission.activity))
@@ -475,6 +475,7 @@ function App() {
 
       const savedSubmission = await saveSubmission(form, nextReport, session.accessToken)
       setReport(savedSubmission.report)
+      setForm((current) => ({ ...current, consent: false }))
       setProductRows((current) => [
         savedSubmission.product,
         ...current.filter((item) => item.name !== savedSubmission.product.name),
